@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-game: 'Space Grotesk', sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #0a0a0f;
+  color: #e2e8f0;
+  font-family: var(--font-game), system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #12121a; }
+::-webkit-scrollbar-thumb { background: #2d2d4a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #4ade80; }
+
+/* Glow effects */
+.glow-green { box-shadow: 0 0 20px rgba(74, 222, 128, 0.3); }
+.glow-blue  { box-shadow: 0 0 20px rgba(0, 245, 255, 0.3); }
+.glow-pink  { box-shadow: 0 0 20px rgba(255, 0, 127, 0.3); }
+
+.text-glow-green { text-shadow: 0 0 10px rgba(74, 222, 128, 0.8); }
+.text-glow-blue  { text-shadow: 0 0 10px rgba(0, 245, 255, 0.8); }
+
+/* Game card hover */
+.game-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.game-card:hover {
+  transform: translateY(-2px);
+}
+
+/* XP bar animation */
+@keyframes xpFill {
+  from { width: 0% }
+  to { width: var(--xp-target) }
+}
+.xp-bar-fill {
+  animation: xpFill 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Notification slide */
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.notification { animation: slideDown 0.3s ease-out; }
+
+/* Avatar colors for default avatars */
+.avatar-A { background: linear-gradient(135deg, #667eea, #764ba2); }
+.avatar-B { background: linear-gradient(135deg, #f093fb, #f5576c); }
+.avatar-C { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+.avatar-D { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+.avatar-E { background: linear-gradient(135deg, #fa709a, #fee140); }
+.avatar-F { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+.avatar-default { background: linear-gradient(135deg, #4ade80, #22c55e); }

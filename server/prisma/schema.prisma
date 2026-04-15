@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String       @id @default(cuid())
+  email        String       @unique
+  username     String       @unique
+  password     String
+  avatar       String       @default("default")
+  role         Role         @default(INTERN)
+  xp           Int          @default(0)
+  level        Int          @default(1)
+  reputation   Int          @default(0)
+  productivity Int          @default(0)
+  creativity   Int          @default(0)
+  companyId    String?
+  company      Company?     @relation(fields: [companyId], references: [id])
+  gameResults  GameResult[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Company {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slogan    String   @default("Work hard, play harder.")
+  players   User[]
+  createdAt DateTime @default(now())
+}
+
+model GameResult {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  gameType  GameType
+  score     Int
+  xpEarned  Int
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  INTERN
+  JUNIOR
+  SENIOR
+}
+
+enum GameType {
+  BUG_HUNT
+  EMAIL_CHAOS
+}
